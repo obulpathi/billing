@@ -165,7 +165,8 @@ def process(master, input_container, output_container):
     domains_unused_formatted = domains_unused.map(formatUnusedDomain)
 
     # for each domain, calculate bandwidth and request count
-    aggregatedLogs = formattedRDD.combineByKey(createCombiner, mergeValue, mergeCombiners)
+    aggregatedLogs = formattedRDD.combineByKey(createCombiner, mergeValue,
+                                               mergeCombiners)
 
     # add type of domain, project-ID, service-ID
     joinedWithDomainDetails = aggregatedLogs.join(domainsRDD)
